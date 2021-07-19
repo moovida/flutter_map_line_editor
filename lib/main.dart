@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_map_dragmarker/dragmarker.dart';
 import 'polyeditor.dart';
@@ -15,14 +15,10 @@ class TestApp extends StatefulWidget {
 }
 
 class _TestAppState extends State<TestApp> {
-
   PolyEditor polyEditor;
 
   List<Polyline> polyLines = [];
-  var testPolyline = new Polyline(
-      color: Colors.deepOrange,
-      points: []
-  );
+  var testPolyline = new Polyline(color: Colors.deepOrange, points: []);
 
   @override
   void initState() {
@@ -33,15 +29,14 @@ class _TestAppState extends State<TestApp> {
       points: testPolyline.points,
       pointIcon: Icon(Icons.crop_square, size: 23),
       intermediateIcon: Icon(Icons.lens, size: 15, color: Colors.grey),
-      callbackRefresh: () => { this.setState(() {})},
+      callbackRefresh: () => {this.setState(() {})},
     );
-    
-    polyLines.add( testPolyline );
+
+    polyLines.add(testPolyline);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         body: Center(
@@ -60,7 +55,7 @@ class _TestAppState extends State<TestApp> {
               layers: [
                 TileLayerOptions(
                     urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                     subdomains: ['a', 'b', 'c']),
                 PolylineLayerOptions(polylines: polyLines),
                 DragMarkerPluginOptions(markers: polyEditor.edit()),
